@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: Maya Wallet
+  jpa:
+    hibernate:
+      ddl-auto:
+  datasource:
+    url: jdbc:h2:file:/maya/wallet
+    username: maya
+  h2:
+    console:
+      enabled: true
+      path: /h2
