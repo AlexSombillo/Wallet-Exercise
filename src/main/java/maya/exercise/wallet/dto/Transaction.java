@@ -1,16 +1,25 @@
 package maya.exercise.wallet.dto;
 
-import lombok.Data;
 
-import javax.persistence.Entity;
-import java.util.Date;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDateTime;
 
-@Data
 @Entity
+@Getter
+@Setter
 public class Transaction {
-    Integer transactionId;
-    Date transactionDate;
-    Float transactionAmount;
-    String transactionDescription;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private Long senderId;
+    private Long recipientId;
+    private Double amount;
+    private LocalDateTime timestamp;
+    private String status;
 }
