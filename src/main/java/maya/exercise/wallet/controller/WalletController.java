@@ -1,8 +1,8 @@
 package maya.exercise.wallet.controller;
 
-import maya.wallet.model.Transaction;
-import maya.wallet.model.User;
-import maya.wallet.service.WalletService;
+import maya.exercise.wallet.dto.Transaction;
+import maya.exercise.wallet.dto.User;
+import maya.exercise.wallet.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
