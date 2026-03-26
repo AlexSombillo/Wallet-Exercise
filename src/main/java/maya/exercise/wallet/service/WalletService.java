@@ -4,6 +4,8 @@ import maya.exercise.wallet.dto.Transaction;
 import maya.exercise.wallet.dto.UserAccount;
 import maya.exercise.wallet.repository.TransactionRepository;
 import maya.exercise.wallet.repository.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ import java.util.List;
 
 @Service
 public class WalletService {
+
+    private static final Logger logger = LoggerFactory.getLogger(WalletService.class);
+
     @Autowired
     private UserRepository userRepo;
     @Autowired private TransactionRepository txRepo;
@@ -24,12 +29,15 @@ public class WalletService {
     public Transaction sendMoney(String externalId, Long recipientId, Double amount) {
         UserAccount sender = userRepo.findByExternalId(externalId).orElseThrow();
         UserAccount recipient = userRepo.findById(recipientId).orElseThrow();
+        logger.info("Generated transaction for Sender:{} to Recepient:{}", sender, recipient);
 
-        if (sender.getBalance() < amount) throw new RuntimeException("Insufficient funds");
+        if (sender.getBalance() < amount)
+            logger.error("Insufficient Funds");
 
         sender.setBalance(sender.getBalance() - amount);
         recipient.setBalance(recipient.getBalance() + amount);
 
+        logger.warn("Transaction for Amount: {} is validated", amount );
         userRepo.save(sender);
         userRepo.save(recipient);
 
@@ -45,7 +53,7 @@ public class WalletService {
 
     public UserAccount createUser(String externalId, String name, Double initialBalance) {
         if (userRepo.findByExternalId(externalId).isPresent()) {
-            throw new RuntimeException("UserAccount with this X-UserAccount-Id already exists");
+            logger.error("UserAccount with this X-UserAccount-Id already exists");
         }
 
         UserAccount userAccount = new UserAccount();
