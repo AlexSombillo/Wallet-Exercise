@@ -11,10 +11,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-public class User {
+public class UserAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String externalId;
     private String name;
     private Double balance;

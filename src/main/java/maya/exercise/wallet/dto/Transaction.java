@@ -16,9 +16,9 @@ import java.time.LocalDateTime;
 public class Transaction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private Long senderId;
-    private Long recipientId;
+    private Integer id;
+    private Integer senderId;
+    private Integer recipientId;
     private Double amount;
     private LocalDateTime timestamp;
     private String status;
