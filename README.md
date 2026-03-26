@@ -44,13 +44,16 @@ mvn spring-boot:run -Dspring-boot.run.profiles=h2
 
 
 ## API Endpoints
-|  |  |  |
-| GET | /api/wallet/balance |  |
-| POST | /api/wallet/send?recipientId={id}&amount={amt} |  |
-| GET | /api/wallet/transactions |  |
-| GET | /api/wallet/transactions/{id} |  |
-| POST | /api/wallet/user?name={name}&initialBalance={amt} | X-User-Id |
-| GET | /api/wallet/friends |  |
+
+| Method | Endpoint                                          | Description                           |
+|--------|---------------------------------------------------|---------------------------------------|
+| GET    | /api/wallet/balance                               | Get wallet balance for logged-in user |    
+| POST   | /api/wallet/send?recipientId={id}&amount={amt}    | Send money to a recipient             |
+| GET    | /api/wallet/transactions                          | Get transaction history               |
+| GET    | /api/wallet/transactions/{id}                     | Get transaction details               |
+| POST   | /api/wallet/user?name={name}&initialBalance={amt} | Create a new user tied to X-User-Id   |
+| GET    | /api/wallet/friends                               | Fetch external friend list            |
+   
 
 
 Note: All endpoints require the X-User-Id header.
